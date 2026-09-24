@@ -1,7 +1,10 @@
 import { useState, useEffect, useCallback } from 'react'
 
 /* ─── Constants ───────────────────────────────────────────────────── */
-const API_BASE = '/patients'
+// Use the deployed backend URL if provided via environment variable, otherwise fallback to local
+const API_BASE = import.meta.env.VITE_API_URL 
+  ? `${import.meta.env.VITE_API_URL}/patients` 
+  : '/patients'
 const SEX_OPTIONS = ['Male', 'Female', 'Other', 'Decline to Answer']
 const US_STATES = [
   'AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN',
