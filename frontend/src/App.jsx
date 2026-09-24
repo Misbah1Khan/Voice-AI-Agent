@@ -1,17 +1,14 @@
 import { useState, useEffect, useCallback } from 'react'
 
 /* ─── Constants ───────────────────────────────────────────────────── */
-// Use the deployed backend URL if provided via environment variable, otherwise fallback to local
-const rawApiUrl = import.meta.env.VITE_API_URL || ''
-const API_BASE = rawApiUrl 
-  ? `${rawApiUrl.replace(/\/+$/, '').replace(/\/docs$/, '')}/patients` 
-  : '/patients'
+// Use the deployed backend URL if provided via environment variable, otherwise fallback to deployed backend
+const API_BASE = (import.meta.env.VITE_API_URL || 'https://voice-ai-agent-backend.up.railway.app').replace(/\/+$/, '') + '/patients'
 const SEX_OPTIONS = ['Male', 'Female', 'Other', 'Decline to Answer']
 const US_STATES = [
-  'AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN',
-  'IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV',
-  'NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN',
-  'TX','UT','VT','VA','WA','WV','WI','WY','DC',
+  'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN',
+  'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV',
+  'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN',
+  'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY', 'DC',
 ]
 
 const EMPTY_FORM = {
@@ -74,7 +71,7 @@ const RefreshIcon = () => (
 /* ─── Helpers ─────────────────────────────────────────────────────── */
 function formatPhone(p) {
   if (!p || p.length !== 10) return p || '—'
-  return `(${p.slice(0,3)}) ${p.slice(3,6)}-${p.slice(6)}`
+  return `(${p.slice(0, 3)}) ${p.slice(3, 6)}-${p.slice(6)}`
 }
 function formatDate(d) {
   if (!d) return '—'
