@@ -2,8 +2,9 @@ import { useState, useEffect, useCallback } from 'react'
 
 /* ─── Constants ───────────────────────────────────────────────────── */
 // Use the deployed backend URL if provided via environment variable, otherwise fallback to local
-const API_BASE = import.meta.env.VITE_API_URL 
-  ? `${import.meta.env.VITE_API_URL}/patients` 
+const rawApiUrl = import.meta.env.VITE_API_URL || ''
+const API_BASE = rawApiUrl 
+  ? `${rawApiUrl.replace(/\/+$/, '').replace(/\/docs$/, '')}/patients` 
   : '/patients'
 const SEX_OPTIONS = ['Male', 'Female', 'Other', 'Decline to Answer']
 const US_STATES = [
@@ -397,7 +398,8 @@ export default function App() {
       setEditPatient(null)
       fetchPatients()
     } catch (err) {
-      toast('Operation failed', 'error')
+      console.error("Save Error:", err)
+      toast('Operation failed. Check browser console for details.', 'error')
     }
   }
 
