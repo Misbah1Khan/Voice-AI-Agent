@@ -16,9 +16,19 @@ A full-stack patient registration system powered by **FastAPI**, **SQLite**, and
 
 ---
 
-## Quick Start
+### 1. Vendor Blocker & Alternative Testing
 
-### 1. Install Backend Dependencies
+**Note to Reviewers:** Due to regulatory compliance restrictions on telephony platforms (requiring a verified US business address/profile to purchase a dialable US number), I was unable to provision a live phone number in time. 
+
+However, the voice agent is fully configured. You can test it via a **Web Call** without needing a phone number:
+1. Go to the [Vapi Dashboard](https://dashboard.vapi.ai) (or your configured platform).
+2. Create an assistant using the prompt provided in `VOICE_AGENT_PROMPT.md`.
+3. Set the tool call webhook to this API's URL (e.g., `https://<your-ngrok-url>/vapi/webhook`).
+4. Use the "Web Call" or "Talk" button in the dashboard to speak to the agent through your browser.
+
+Alternatively, you can test the entire flow end-to-end using the frontend dashboard provided.
+
+### 2. Install Backend Dependencies
 
 ```bash
 cd backend
